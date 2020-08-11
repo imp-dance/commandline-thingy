@@ -11,7 +11,16 @@ export const colors: colorsInterface = {
 
 interface whitespaceInterface {
   padding: string;
+  boxSpacing: string;
 }
 export const whitespace: whitespaceInterface = {
   padding: "2vmin",
+  boxSpacing: "10px",
+};
+
+interface fontsizesInterface {
+  normal: string;
+}
+export const fontsizes: fontsizesInterface = {
+  normal: "18px",
 };
