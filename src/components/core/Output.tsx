@@ -25,9 +25,6 @@ const OutPutContainer = styled.div`
 `;
 
 const OutputBox = styled.div`
-  border-left: 2px solid #1c2528;
-  padding-left: 5px;
-  margin-left: 4px;
   margin-top: ${whitespace.boxSpacing};
 `;
 

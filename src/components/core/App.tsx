@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import uniqueId from "lodash.uniqueid";
-import { colors, fontsizes } from "../helpers/constants";
+import { colors, fontsizes, whitespace } from "../helpers/constants";
 import InputBox from "./InputBox";
 import Output from "./Output";
 
@@ -18,15 +18,31 @@ const App: React.FC = () => {
   const pushOutput = (entry: any) => {
     setOutput([...output, entry]);
   };
+  const filterArray = (el: any) => el !== null && el !== "";
   const runCommand = (event: React.FormEvent) => {
     event.preventDefault();
-    const command = inputValue;
+    const command = inputValue.trim();
+    if (command.trim() === "") return;
     setPrevValue(command);
-    setHistory([...history, command]);
+    setHistory([...history.filter(filterArray), command]);
     setInputValue("");
     switch (true) {
-      case command.trim() === "history":
-        pushOutput(history.map((item) => <div key={uniqueId()}>{item}</div>));
+      case command === "history":
+        pushOutput([
+          <Command>history</Command>,
+          <HistoryBox>
+            {history.map((item) =>
+              item !== "" ? <li key={uniqueId()}>{item}</li> : ""
+            )}
+          </HistoryBox>,
+        ]);
+        break;
+      case command.startsWith("echo "):
+        pushOutput(
+          <div>
+            <Command>echo</Command> {command.substring(5)}
+          </div>
+        );
         break;
       default:
         return;
@@ -55,6 +71,15 @@ const Container = styled.div`
   color: ${colors.textNormal};
   font-family: "Source Code Pro", monospace;
   font-size: ${fontsizes.normal};
+`;
+
+const Command = styled.span`
+  color: ${colors.textCommand};
+`;
+
+const HistoryBox = styled.ul`
+  padding-left: 22px;
+  list-style: circle;
 `;
 
 export default App;
