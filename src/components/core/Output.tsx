@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { whitespace, colors } from "../helpers/constants";
+import { whitespace } from "../helpers/constants";
 
 interface OutputInterface {
   focusInput: () => void;

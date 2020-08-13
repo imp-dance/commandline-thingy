@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import uniqueId from "lodash.uniqueid";
-import { colors, fontsizes, whitespace } from "../helpers/constants";
+import { colors, fontsizes } from "../helpers/constants";
 import InputBox from "./InputBox";
 import Output from "./Output";
 
